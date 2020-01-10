@@ -1,4 +1,9 @@
 CONDA_ENV = open-life-science-website
+MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+
+ifeq ($(shell uname -s),Darwin)
+	MINICONDA_URL=https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh
+endif
 
 CONDA = $(shell which conda)
 ifeq ($(CONDA),)
@@ -13,6 +18,11 @@ clean: ## cleanup the project
 	@rm -rf .bundle
 	@rm -rf vendor
 .PHONY: clean
+
+install-conda: ## install Miniconda
+	curl $(MINICONDA_URL) -o miniconda.sh
+	bash miniconda.sh -b
+.PHONY: install-conda
 
 create-env: ## create conda environment
 	if ${CONDA} env list | grep '^${CONDA_ENV}'; then \

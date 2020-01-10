@@ -66,6 +66,12 @@ In the sequel, we assume you use miniconda.
    ```
 
 3. Navigate to the `open-life-science.github.io/` folder with `cd`
+4. Install conda:
+
+   ```
+   make install-conda
+   ```
+
 4. Set up the conda environment:
 
    ```

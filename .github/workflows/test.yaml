@@ -1,0 +1,20 @@
+name: CI
+
+on: [push]
+
+jobs:
+  test:
+    name: Test links
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install conda
+      run: |
+        make install-conda
+        export PATH="$HOME/miniconda3/bin:$PATH"
+        conda config --set always_yes yes --set changeps1 no
+    - name: Set up the conda environment
+      run: make create-env
+    - name: Install the project's dependencies
+      run: make install
+    - name: Run the link checkers
+      run: make check-html
